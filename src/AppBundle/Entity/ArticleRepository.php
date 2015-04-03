@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,4 +13,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class ArticleRepository extends EntityRepository
 {
+    public function findApi($id = null)
+    {
+        $qb = $this->createQueryBuilder('s');
+        if(null !== $id)
+        {
+            $qb
+                ->where('s.id = :id')
+                ->setParameter(':id', $id);
+        }
+        return null === $id ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getSingleResult(AbstractQuery::HYDRATE_ARRAY);
+    }
+
 }

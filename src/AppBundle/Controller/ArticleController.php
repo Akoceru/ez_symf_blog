@@ -9,14 +9,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class ArticleController extends Controller
 {
     /**
-     * @Route("/show")
+     * @Route("/article")
      * @Template()
      */
-    public function showAction()
+    public function indexAction()
     {
-        return array(
-                // ...
-            );    }
+        $em = $this->getDoctrine()->getManager();
+
+        $articles = $em->getRepository('AppBundle:Article')->findAll();
+
+        return $this->render('AppBundle:Article:index.html.twig', [
+            'articles' => $articles,
+
+        ]);    }
 
     /**
      * @Route("/create")

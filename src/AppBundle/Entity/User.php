@@ -35,6 +35,12 @@ class User
      */
     private $password;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="profile_pic", type="string", length=255)
+     */
+    private $profile_pic;
 
     /**
      * Get id
@@ -90,5 +96,33 @@ class User
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * Set profile_pic
+     *
+     * @param string $profilePic
+     * @return User
+     */
+    public function setProfilePic($profilePic)
+    {
+        $this->profile_pic = $profilePic;
+
+        return $this;
+    }
+
+    /**
+     * Get profile_pic
+     *
+     * @return string 
+     */
+    public function getProfilePic()
+    {
+        return $this->profile_pic;
+    }
+
+    public function __toString()
+    {
+        return $this->getUsername();
     }
 }
